@@ -131,10 +131,9 @@ end
 
 """
 Convert JSON objects to native Julia types for comparison.
-Note: JSON.parse() already returns native Julia types (Dict, Array), so minimal conversion needed.
 """
 function normalize_json(val)
-    if val isa Dict
+    if val isa AbstractDict
         return ToonFormat.JsonObject(
             string(k) => normalize_json(v) for (k, v) in pairs(val)
         )
